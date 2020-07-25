@@ -12,12 +12,10 @@ const camera = new THREE.PerspectiveCamera(
   1000
 )
 
-//Nothing will show up unless camera is set
-camera.position.z = 5;
-
-const renderer = new THREE.WebGLRenderer({antialias: true});
-renderer.setClearColor("#e5e5e5");
+const renderer = new THREE.WebGLRenderer({antialias: true, alpha: true});
+// renderer.setClearColor("#e5e5e5");
 renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(window.devicePixelRatio);
 
 document.body.appendChild(renderer.domElement)
 
@@ -54,15 +52,30 @@ for(var i = 0; i < 15; i++){
 // mesh.scale.set(2,1,1);
 
 //color, intensity, distance
-const light = new THREE.PointLight(0xFFFFFF, 1, 500);
-light.position.set(10,0,25);
+const light = new THREE.PointLight(0xFFFFFF, 1, 1000);
+light.position.set(0,0,0);
 scene.add(light);
 
+const light2 = new THREE.PointLight(0xFFFFFF, 2, 100);
+light.position.set(0,0,25);
+scene.add(light);
 
-// let loader = new THREE.GLTFLoader();
-// loader.load('scene.gltf', gltf => {
-//     scene.add(gltf.scene);
-// })
+//Nothing will show up unless camera is set
+camera.position.z = 5;
+
+
+let loader = new THREE.GLTFLoader();
+loader.load('/models/sword.glb', gltf => {
+    const sword = gltf.scene.children[0];
+    sword.rotation.z = 90;
+    sword.rotation.y = 90;
+    // sword.scale.set(0.5,0.5,0.5);
+    scene.add(gltf.scene);
+}, undefined, function ( error ) {
+
+	console.error( error );
+
+});
 
 
 
