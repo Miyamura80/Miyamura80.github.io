@@ -61,15 +61,15 @@ light.position.set(0,0,25);
 scene.add(light);
 
 //Nothing will show up unless camera is set
-camera.position.z = 5;
+camera.position.z = 20;
 
 
 let loader = new THREE.GLTFLoader();
 loader.load('/models/sword.glb', gltf => {
     const sword = gltf.scene.children[0];
-    sword.rotation.z = 90;
-    sword.rotation.y = 90;
-    // sword.scale.set(0.5,0.5,0.5);
+    sword.rotation.z = Math.PI*.5;
+    sword.rotation.y = Math.PI*.5;
+    // sword.scale.set(2,1,1);
     scene.add(gltf.scene);
 }, undefined, function ( error ) {
 
