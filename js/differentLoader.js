@@ -1,3 +1,5 @@
+
+
 const scene = new THREE.Scene()
 scene.background = new THREE.Color(0xdddddd);
 
@@ -33,10 +35,6 @@ camera.position.z = 20;
 
 let loader = new THREE.GLTFLoader();
 
-
-var dracoLoader = new DRACOLoader();
-dracoLoader.setDecoderPath( '/examples/js/libs/draco/' );
-loader.setDRACOLoader( dracoLoader )
 
 
 
