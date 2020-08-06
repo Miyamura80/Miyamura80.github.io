@@ -23,28 +23,56 @@ section{
     margin: 1em;
 }
 
-.dev-container{
-    width: 30%;
+
+.dev-container .inner {
     background: #24305e;
+    padding: 1em;
     border-radius: 10px;
-
-
-
-        /* h1{
-            color: white;
-            margin: 0;
-        }
-
-        p{
-            color: white;
-            font-size: .8rem;
-        } */
+    width: 250px;
+    clip-path: circle(10% at 90% 20%);
+    transition: all .5s ease-in-out;
+    cursor: pointer;
+ 
 }
 
-/* .dev-container.inner {
-    background: #a8a8a8;
-    padding: 1em;
-} */
+.dev-container:hover .inner {
+    clip-path: circle(85%);
+    background-color: green;
+}
+
+.dev-container .inner h1{
+    color: white;
+    margin: 0;
+}
+
+.dev-container .inner span img{
+    max-width: 10%;
+    max-height: 10%;
+    margin-left: 90%;
+    margin-top: 1%;
+    /* margin-left: 225px;
+    margin-top: 0.2em; */
+    /* align-content: left; */
+    
+}
+
+.dev-container .inner p{
+    color: white;
+    font-size: .8erm;
+}
+
+
+
+.dev-container{
+    width: 250px;
+    background: white;
+    border-radius: 10px;
+    margin: 1em;
+}
+
+
+
+
 
 main{
     grid-area: main;
