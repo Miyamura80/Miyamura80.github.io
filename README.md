@@ -1,6 +1,11 @@
 **Source code for EiMi | Home**
 
 
+![alt text][usehtml]
+
+[usehtml]: https://forthebadge.com/images/badges/uses-html.svg "Written with HTML"
+
+
 Check out the site now on custom domain: [eimi.online](http://eimi.online)
 
 
