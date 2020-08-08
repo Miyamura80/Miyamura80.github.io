@@ -81,11 +81,28 @@ main{
     margin: 1em;
 }
 
+
 .splits{
+    grid-area: split;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+}
+
+.splits section.portfolio{
+    background: #f76c6c;
+}
+
+.splits section.modelling{
+    background: #24305e;
+}
+
+/* .splits{
     grid-area: split;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: auto;
 }
 
 
@@ -95,6 +112,7 @@ main{
     order: 1;
     flex-grow: 1;
     flex-shrink: 1;
+
 }
 
 .splits section.modelling{
@@ -102,9 +120,18 @@ main{
     order: 2;
     flex-grow: 1;
     flex-shrink: 1;
-}
+} */
 
 section.shop{
     grid-area: shop;
     background: #f8e9a1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+
+}
+
+img{
+    max-width: 100%;
+    max-height: 100%;
+    overflow: hidden;
 }

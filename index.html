@@ -1,134 +1,213 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-	<head>
-		<title>three.js webgl - lights - point lights</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-		<link type="text/css" rel="stylesheet" href="css/main.css">
-	</head>
-	<body>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>EiMi | Home</title>
+    <link rel="stylesheet" href="css/gridPlay.css">
+  </head>
+  <body>
 
-		<div id="info">
-			<a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> - point lights WebGL demo.<br />
-			Walt Disney head by <a href="http://davidoreilly.com/post/18087489343/disneyhead" target="_blank" rel="noopener">David OReilly</a>
-		</div>
+    <!-- The order of the sections don't actually matter-->
+    <div class="grid-container">
+        <main>
+            Main
+        </main>
+        <div class="splits">
+            <section class="portfolio">
+                developper portfolio
+                <div class="dev-container">
+                    <div class="inner">
+                        <span>
+                            <img src="images/discordGreen.png">
+                        </span>
+                        <h1>Hey</h1>
+                        <p>Check out my coding portfolio</p>
+                    </div>
+                </div>
+                
+            </section>
+            <section class="modelling">
+                3D portfolio aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+            </section>
+        </div>
+        
+        <section class="shop">
+            <div class="card">
+                <div class="info">
+                    <strong>Mikey's Bathwater</strong>
+                    <p>National Treasure, worth 4 billion dollars</p>
+                </div>
+                <img src="images/mikey_bathwater.jpeg">
+            </div>
 
-		<script type="module">
+            <div class="card">
+                <div class="info">
+                    <strong>Burger in a wrap</strong>
+                    <p>£1.50 Better than burger king</p>
+                </div>
+                <img src="images/burger_in_a_wrap.jpg">
+            </div>
 
-            import * as THREE from './ThreeJsCode/three.module.js';
+            <div class="card">
+                <div class="info">
+                    <strong>Sushi in a wrap</strong>
+                    <p>£177013.00 Part of the "Essential weeb set"</p>
+                </div>
+                <img src="images/sushi_in_a_wrap.jpg">
+            </div>
 
-			import Stats from './Borrowed_code/stats.module.js';
+            <div class="card">
+                <div class="info">
+                    <strong>Cookies in a wrap</strong>
+                    <p>£9.11 The cookie monsters are onto you</p>
+                </div>
+                <img src="images/cookies_in_a_wrap.jpg">
+            </div>
 
-			import { OBJLoader } from './Borrowed_code/OBJLoader.js';
+            <div class="card">
+                <div class="info">
+                    <strong>Donuts in a wrap</strong>
+                    <p>£0.69 Approved by 500 year old vampire</p>
+                </div>
+                <img src="images/donuts_in_a_wrap.jpg">
+            </div>
+           
+            
+        </section>
+        
+    </div>
 
-			var camera, scene, renderer,
-				light1, light2, light3, light4,
-				object, stats;
 
-			var clock = new THREE.Clock();
+    <script type="module">
+        import * as THREE from './ThreeJsCode/three.module.js';
 
-			init();
-			animate();
+        import { AsciiEffect } from './Borrowed_code/AsciiEffect.js';
+        import { OBJLoader } from './Borrowed_code/OBJLoader.js';
+        import { TrackballControls } from './Borrowed_code/TrackballControls.js';
 
-			function init() {
+        var camera, controls, scene, renderer, effect;
 
-				camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 1000 );
-				camera.position.z = 100;
+        var sphere, plane, sphere2, rodMesh;
 
-				scene = new THREE.Scene();
+        var start = Date.now();
 
-				//model
+        let object;
 
-				var loader = new OBJLoader();
-				loader.load( 'models/sword.obj', function ( obj ) {
+        init();
+        animate();
 
-					object = obj;
-					object.scale.multiplyScalar( 0.8 );
-					object.position.y = - 30;
-					scene.add( object );
+        function init() {
 
-				} );
+            camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 1000 );
+            camera.position.y = 150;
+            camera.position.z = 500;
 
-				var sphere = new THREE.SphereBufferGeometry( 0.5, 16, 8 );
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color( 0, 0, 0 );
 
-				//lights
+            var light = new THREE.PointLight( 0xffffff );
+            light.position.set( 500, 500, 500 );
+            scene.add( light );
 
-				light1 = new THREE.PointLight( 0xff0040, 2, 50 );
-				light1.add( new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( { color: 0xff0040 } ) ) );
-				scene.add( light1 );
+            var light = new THREE.PointLight( 0xffffff, 0.25 );
+            light.position.set( - 500, - 500, - 500 );
+            scene.add( light );
 
-				light2 = new THREE.PointLight( 0x0040ff, 2, 50 );
-				light2.add( new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( { color: 0x0040ff } ) ) );
-				scene.add( light2 );
+            sphere = new THREE.Mesh( new THREE.SphereBufferGeometry( 100, 20, 10 ), new THREE.MeshPhongMaterial( { flatShading: true } ) );
+            scene.add( sphere );
 
-				light3 = new THREE.PointLight( 0x80ff80, 2, 50 );
-				light3.add( new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( { color: 0x80ff80 } ) ) );
-				scene.add( light3 );
+            sphere2 = new THREE.Mesh( new THREE.SphereBufferGeometry( 100, 20, 10 ), new THREE.MeshPhongMaterial( { flatShading: true } ) );
+            scene.add( sphere2 );
+            sphere2.position.x = 150
 
-				light4 = new THREE.PointLight( 0xffaa00, 2, 50 );
-				light4.add( new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( { color: 0xffaa00 } ) ) );
-				scene.add( light4 );
+            rodMesh = new THREE.Mesh( new THREE.SphereBufferGeometry( 80, 20, 10 ), new THREE.MeshPhongMaterial( { flatShading: true } ) );
+            scene.add(rodMesh);
+            rodMesh.position.x = 100
+            rodMesh.scale.y = 3.0
 
-				//renderer
+            var loader = new OBJLoader();
+            loader.load( 'models/sword.obj', function ( obj ) {
 
-				renderer = new THREE.WebGLRenderer( { antialias: true } );
-				renderer.setPixelRatio( window.devicePixelRatio );
-				renderer.setSize( window.innerWidth, window.innerHeight );
-				document.body.appendChild( renderer.domElement );
+                object = obj;
+                object.scale.multiplyScalar( 0.8 );
+                object.position.y = - 100;
+                scene.add( object );
 
-				//stats
+            } );
 
-				stats = new Stats();
-				document.body.appendChild( stats.dom );
+            // Plane
 
-				window.addEventListener( 'resize', onWindowResize, false );
+            plane = new THREE.Mesh( new THREE.PlaneBufferGeometry( 800, 400 ), new THREE.MeshBasicMaterial( { color: 0xe0e0e0 } ) );
+            plane.position.y = - 200;
+            plane.rotation.x = - Math.PI / 2;
+            scene.add( plane );
 
-			}
+            renderer = new THREE.WebGLRenderer();
+            renderer.setSize( window.innerWidth, window.innerHeight );
 
-			function onWindowResize() {
+            effect = new AsciiEffect( renderer, ' .:-+*=%@#', { invert: true } );
+            effect.setSize( window.innerWidth, window.innerHeight );
+            effect.domElement.style.color = '#374785';
+            effect.domElement.style.backgroundColor = '#a8d0e6';
 
-				camera.aspect = window.innerWidth / window.innerHeight;
-				camera.updateProjectionMatrix();
+            // Special case: append effect.domElement, instead of renderer.domElement.
+            // AsciiEffect creates a custom domElement (a div container) where the ASCII elements are placed.
 
-				renderer.setSize( window.innerWidth, window.innerHeight );
+            document.getElementsByClassName("grid-container").item(0).getElementsByTagName("main")[0].appendChild( effect.domElement );
 
-			}
+            // controls = new TrackballControls( camera, effect.domElement );
+            // camera.position.set(0.7376875317677195, 15.343411263811188, 79.6562953957305); 
+ 
 
-			function animate() {
+            window.addEventListener( 'resize', onWindowResize, false );
 
-				requestAnimationFrame( animate );
+        }
 
-				render();
+        function onWindowResize() {
 
-			}
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
 
-			function render() {
+            renderer.setSize( window.innerWidth, window.innerHeight );
+            effect.setSize( window.innerWidth, window.innerHeight );
 
-				var time = Date.now() * 0.0005;
-				var delta = clock.getDelta();
+        }
 
-				if ( object ) object.rotation.y -= 0.5 * delta;
+        //
 
-				light1.position.x = Math.sin( time * 0.7 ) * 30;
-				light1.position.y = Math.cos( time * 0.5 ) * 40;
-				light1.position.z = Math.cos( time * 0.3 ) * 30;
+        function animate() {
+            requestAnimationFrame( animate );
+            render();
 
-				light2.position.x = Math.cos( time * 0.3 ) * 30;
-				light2.position.y = Math.sin( time * 0.5 ) * 40;
-				light2.position.z = Math.sin( time * 0.7 ) * 30;
+        }
 
-				light3.position.x = Math.sin( time * 0.7 ) * 30;
-				light3.position.y = Math.cos( time * 0.3 ) * 40;
-				light3.position.z = Math.sin( time * 0.5 ) * 30;
+        function render() {
 
-				light4.position.x = Math.sin( time * 0.3 ) * 30;
-				light4.position.y = Math.cos( time * 0.7 ) * 40;
-				light4.position.z = Math.sin( time * 0.5 ) * 30;
+        var timer = Date.now() - start;
 
-				renderer.render( scene, camera );
+            sphere.position.y = Math.abs( Math.sin( timer * 0.002 ) ) * 150;
+            sphere.rotation.x = timer * 0.0003;
+            sphere.rotation.z = timer * 0.0002;
 
-			}
 
-		</script>
-	</body>
+
+            sphere2.position.y = Math.abs( Math.sin( timer * 0.002 ) ) * 150;
+            sphere2.rotation.x = timer * 0.0003;
+            sphere2.rotation.z = timer * 0.0002;
+
+            rodMesh.position.y = Math.abs( Math.sin( timer * 0.002 ) ) * 150+ 150;
+
+            // controls.update();
+
+            effect.render( scene, camera );
+
+        }
+
+
+    </script>
+
+
+  </body>
 </html>
