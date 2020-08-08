@@ -12,7 +12,7 @@ body{
     grid-template-rows: 4fr 2fr 2fr;
     grid-template-areas: 
         "main main"
-        "portfolio modelling"
+        "split split"
         "shop shop";
     height: 100vh;
     margin: 2em;
@@ -28,7 +28,7 @@ section{
     background: #24305e;
     padding: 1em;
     border-radius: 10px;
-    width: 250px;
+    width: 100%;
     clip-path: circle(10% at 90% 20%);
     transition: all .5s ease-in-out;
     cursor: pointer;
@@ -81,14 +81,27 @@ main{
     margin: 1em;
 }
 
-section.portfolio{
-    grid-area: portfolio;
-    background: #f76c6c;
+.splits{
+    grid-area: split;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
-section.modelling{
-    grid-area: modelling;
+
+
+.splits section.portfolio{
+    background: #f76c6c;
+    order: 1;
+    flex-grow: 1;
+    flex-shrink: 1;
+}
+
+.splits section.modelling{
     background: #24305e;
+    order: 2;
+    flex-grow: 1;
+    flex-shrink: 1;
 }
 
 section.shop{
