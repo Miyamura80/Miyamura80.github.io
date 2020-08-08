@@ -1,6 +1,6 @@
 **Source code for EiMi | Home**
 
-![website status](![Website](https://img.shields.io/website?down_color=red&down_message=currently%20down&style=for-the-badge&up_color=blue&up_message=online&url=http%3A%2F%2Feimi.online))
+![website status](https://img.shields.io/website?down_color=red&down_message=currently%20down&style=for-the-badge&up_color=blue&up_message=online&url=http%3A%2F%2Feimi.online)
 
 ![alt text][usehtml]
 
